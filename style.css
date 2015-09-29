@@ -1,0 +1,88 @@
+body{
+	font-family: 'Bitter', serif;
+}
+#top{
+	border-bottom: solid 2px;
+	border-color: #d8d8d8;
+
+}
+.logo{
+	font-size: 48px;
+	color:#F7A519;
+	margin-top: 15px;
+	margin-bottom: 15px;
+}
+
+.searchBar{
+	font-size: 25px;
+	color: #D8D8D8;
+	border: 2px solid;
+	border-color: #D8D8D8;
+	height: 50px;
+	width: 640px;
+	margin-top: 15px;
+	margin-bottom: 15px;
+
+}
+
+.logo, .searchBar{
+	display: inline;
+}
+.searchBar::after{
+	color:#F7A519;
+	border-color: #F7A519;
+}
+
+#today{
+	height:420px;
+	width: 100%;
+	background-color: #f8e71c;
+}
+#dayToday{
+	font-size: 15px;
+	margin-top: 55px;
+	margin-bottom: -20px;
+}
+#city{
+	font-size: 35px;
+}
+#tempToday{
+	font-size: 180px;
+	margin-bottom: 55px;
+}
+#dayToday,#city,#tempToday{
+	color: #ffffff;
+	text-align: center;
+}
+#one{
+	background-color: #FFD83C;
+}
+#two{
+	background-color: #ffb74d;
+}
+#three{
+	background-color: #FFA000;
+}
+#one,#two,#three{
+	height:200px;
+}
+#one-sub,#two-sub,#three-sub{
+	border-bottom: solid 5px;
+}
+#one-sub{
+	border-color:#FFD83C;
+}
+#two-sub{
+	border-color:#ffb74d;
+}
+#three-sub{
+	border-color:#FFA000;
+}
+
+
+
+
+
+
+
+
