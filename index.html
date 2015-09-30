@@ -14,52 +14,63 @@
 		  <link rel="stylesheet" href="style.css">
 		</head>
 
-		<body>
-			<div class="col-md-12" id="top">
-				<div class="col-md-3">
-					<p class="logo">
-						Weatherly
-					</p>
+			<body>
+				<div class="col-md-12" id="top">
+					<div class="col-md-3">
+						<p class="logo">
+							Weatherly
+						</p>
+					</div>
+					<div class="col-md-9">
+
+						<form id="citySearch">
+							<div class="form">
+								<input type="text" class="searchBar"  id="citytag" placeholder= "Search by City" autofocus>
+							</div>
+						</form>
+
+					</div>
 				</div>
-				<div class="col-md-9">
-					<form>
-						<div class="search-box">
-							<input class="searchBar" type="text" placeholder="Search by City"/>
-							<!-- <button class="search-button" type="submit"></button> -->
-						</div>
-					</form>
+				<div class="col-md-12" id="today">
+					<p id="dayToday">Today</p><br>
+					<p id="city"><p>
+					<p id="tempToday"></p>
 				</div>
-			</div>
-			<div class="col-md-12" id="today">
-				<p id="dayToday">Today</p><br>
-				<p id="city">SAN FRANCISCO<p>
-				<p id="tempToday">63</p>
-			</div>
-			<div class="col-md-4" id="one">
+				<div class="col-md-4" id="one">
 
-			</div>
-			<div class="col-md-4" id="two">
+				</div>
+				<div class="col-md-4" id="two">
 
-			</div>
-			<div class="col-md-4" id="three">
+				</div>
+				<div class="col-md-4" id="three">
 
-			</div>
-			<div class="col-md-4" id="one-sub">
+				</div>
+				<div class="col-md-4" id="one-sub">
 
-			</div>
-			<div class="col-md-4" id="two-sub">
+				</div>
+				<div class="col-md-4" id="two-sub">
 
-			</div>
-			<div class="col-md-4" id="three-sub">
+				</div>
+				<div class="col-md-4" id="three-sub">
 
-			</div>
+				</div>
 
 
-			<!-- jQuery -->
-			 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-			<!-- bootstrap js -->
-			<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-			<!-- custom js -->
-			<script type="text/javascript" src='script.js'></script>
+				<!-- jQuery -->
+				 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+				<!-- bootstrap js -->
+				<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+				<!-- underscore -->
+				<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
+				<!-- custom js -->
+				<script type="text/javascript" src='script.js'></script>
+				<!-- hash template -->
+				<script type="text/template" id="today-temp">
+				  <p><%= city %></p><br>
+				  <p><%= temp %></p><br>
+				  <p><%= weather %></p>
+			  </script>
+
+
 		</body>
 	</html>
