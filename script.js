@@ -1,181 +1,186 @@
 $(function(){
 
+	// Setting form variables
 	var $citySearch = $("#citySearch");
 	var $city = $("#citytag");
 
+	// Setting event listener
 	$citySearch.on('submit', function(event){
 	  	event.preventDefault();
 	  	var searchCity = $city.val();
-	  	console.log(searchCity);
 
+	  // Test to make sure API call is going through correctly
+	  $.ajax( "http://api.openweathermap.org/data/2.5/forecast?q=" + searchCity + ",us&mode=json&units=imperial" )
+	    .done(function() {
+	      console.log( "API request successful" );
+	    })
+	    .fail(function() {
+	      alert( "Mayday! Mayday! The server is down" );
+	    })
+
+	  // API request formatted in JSON 
 		$.getJSON( "http://api.openweathermap.org/data/2.5/forecast?q=" + searchCity + ",us&mode=json&units=imperial", function(data) {
+
 		  var city = [];
-		  // cityName = data.city.name
-		  if (data == undefined || data == null){
+		  var cityName = data.city.name;
+
+		  //if city does NOT exist, throw error
+		  if (data === undefined || data === null){ 
 		  	alert("No City Found!");
 		  }else{
-		 		var cityName = data.city.name
 		  	city.push(cityName);
-			}
+			};
 		  $( "<p/>", {
 		    "class": "my-new-list",
 		    html: city.join( "" )
 		  }).appendTo( "#city" );
 
+		  //Cycles through all of the weather codes and pushes 
+		  //icon that is associated with its condition
+
 		  var weather = []
 		  var idToday = data.list[0].weather[0].id
+
 		  if (idToday >= 200 && idToday <= 299){
-		  	console.log('thunderstorm');
 		  	weather.push('<img src="img/thunderstorm.png">');
-		  }if (idToday >= 300 && idToday <= 399){
-		  	console.log('drizzle');
+		  }else if (idToday >= 300 && idToday <= 399){
 		  	weather.push('<img src="img/drizzle.png">');
 		  }else if (idToday >= 500 && idToday <= 599){
-		  	console.log('rain');
 		  	weather.push('<img src="img/rain.png">');
 		  }else if (idToday >= 600 && idToday <= 699){
-		  	console.log('snow');
 		  	weather.push('<img src="img/snow.png">');
 		  }else if (idToday >= 700 && idToday <= 799){
-		  	console.log('clear skies')
 		  	weather.push('<img src="img/atmosphere.png">');
 		  }else if (idToday >= 800 && idToday <= 899){
-		  	console.log('cloudy skies')
 		  	weather.push('<img src="img/clouds.png">');
-		  }else{
-		  	// alert("No weather idToday found");
-		  }				
-		  console.log(idToday)
-
+			};
 		  $( "<p/>", {
 		    "class": "my-new-list",
 		    html: weather.join( "" )
 		  }).appendTo( "#icon" );
 		  
+		  //pushes todays temp onto the page
+
 		  var tempToday = [];
-		  tempToday.push(' ' + parseInt(data.list[0].main.temp) + '°');
-		  // var tempWithDeg = (tempToday + ' o');
+		  tempToday.push(' ' + parseInt(data.list[0].main.temp) + '<img src="img/one.png">');
+
 		  $( "<p/>", {
 		    "class": "my-new-list",
 		    html: tempToday.join( "" )
 		  }).appendTo( "#tempToday" );
 
+		  //Cycles through all of the weather codes and pushes 
+		  //icon that is associated with its condition
+
 		  var icon1 = [];
 			var idTomorrow = data.list[1].weather[0].id
+
 			if (idTomorrow >= 200 && idTomorrow <= 299){
-				console.log('thunderstorm');
 				icon1.push('<img src="img/thunderstorm.png">');
-			}if (idTomorrow >= 300 && idTomorrow <= 399){
-				console.log('drizzle');
+			}else if (idTomorrow >= 300 && idTomorrow <= 399){
 				icon1.push('<img src="img/drizzle.png">');
 			}else if (idTomorrow >= 500 && idTomorrow <= 599){
-				console.log('rain');
 				icon1.push('<img src="img/rain.png">');
 			}else if (idTomorrow >= 600 && idTomorrow <= 699){
-				console.log('snow');
 				icon1.push('<img src="img/snow.png">');
 			}else if (idTomorrow >= 700 && idTomorrow <= 799){
-				console.log('clear skies')
 				icon1.push('<img src="img/atmosphere.png">');
 			}else if (idTomorrow >= 800 && idTomorrow <= 899){
-				console.log('cloudy skies')
 				icon1.push('<img src="img/clouds.png">');
-			}else{
-				// alert("No weather idTomorrow found");
-			}				
-			console.log(idTomorrow)
+			};		
+
 		  $( "<p/>", {
 		    "class": "my-new-list",
 		    html: icon1.join( "" )
 		  }).appendTo( ".icon1" );
 
+		  //pushes tomorrows temp onto the page
+
 		  var one = []
-		  one.push(' ' + parseInt(data.list[1].main.temp) + '°');
+		  one.push(' ' + parseInt(data.list[1].main.temp) + '<img src="img/two.png">');
 
 		  $( "<p/>", {
-		    "class": "my-new-list",
+		    "class": "one",
 		    html: one.join( "" )
 		  }).appendTo( "#one" );
 
+		  //Cycles through all of the weather codes and pushes 
+		  //icon that is associated with its condition
+
 		  var icon2 = [];
 		  var idDayAfter = data.list[2].weather[0].id
+
 		  if (idDayAfter >= 200 && idDayAfter <= 299){
-		  	console.log('thunderstorm');
 		  	icon2.push('<img src="img/thunderstorm.png">');
-		  }if (idDayAfter >= 300 && idDayAfter <= 399){
-		  	console.log('drizzle');
+		  }else if (idDayAfter >= 300 && idDayAfter <= 399){
 		  	icon2.push('<img src="img/drizzle.png">');
 		  }else if (idDayAfter >= 500 && idDayAfter <= 599){
-		  	console.log('rain');
 		  	icon2.push('<img src="img/rain.png">');
 		  }else if (idDayAfter >= 600 && idDayAfter <= 699){
-		  	console.log('snow');
 		  	icon2.push('<img src="img/snow.png">');
 		  }else if (idDayAfter >= 700 && idDayAfter <= 799){
-		  	console.log('clear skies')
 		  	icon2.push('<img src="img/atmosphere.png">');
 		  }else if (idDayAfter >= 800 && idDayAfter < 899){
-		  	console.log('cloudy skies')
 		  	icon2.push('<img src="img/clouds.png">');
-		  }else{
-		  	// alert("No weather idDayAfter found");
-		  }				
-		  console.log(idDayAfter)
+		  };	
 
 		  $( "<p/>", {
 		    "class": "my-new-list",
 		    html: icon2.join( "" )
 		  }).appendTo( ".icon2" );
 
+		  //pushes day after tomorrows temp onto the page
+
 		  var two = []
-		  two.push(' ' + parseInt(data.list[2].main.temp) + '°');
+		  two.push(' ' + parseInt(data.list[2].main.temp) + '<img src="img/three.png">');
 		  
 		  $( "<p/>", {
-		    "class": "my-new-list",
+		    "class": "two",
 		    html: two.join( "" )
 		  }).appendTo( "#two" );
 
+		  //Cycles through all of the weather codes and pushes 
+		  //icon that is associated with its condition
+
 		  var icon3 = [];
 		  var idDayFour = data.list[3].weather[0].id
+
 		  if (idDayFour >= 200 && idDayFour < 300){
-		  	console.log('thunderstorm');
 		  	icon3.push('<img src="img/thunderstorm.png">');
-		  }if (idDayFour >= 300 && idDayFour < 400){
-		  	console.log('drizzle');
+		  }else if (idDayFour >= 300 && idDayFour < 400){
 		  	icon3.push('<img src="img/drizzle.png">');
 		  }else if (idDayFour >= 500 && idDayFour < 600){
-		  	console.log('rain');
 		  	icon3.push('<img src="img/rain.png">');
 		  }else if (idDayFour >= 600 && idDayFour < 700){
-		  	console.log('snow');
 		  	icon3.push('<img src="img/snow.png">');
 		  }else if (idDayFour >= 700 && idDayFour < 800){
-		  	console.log('clear skies')
 		  	icon3.push('<img src="img/atmosphere.png">');
 		  }else if (idDayFour >= 800 && idDayFour < 900){
-		  	console.log('cloudy skies')
 		  	icon3.push('<img src="img/clouds.png">');
-		  }else{
-		  	// alert("No weather idDayFour found");
-		  }				
-		  console.log(idDayFour)
+		  };			
 
 		  $( "<p/>", {
 		    "class": "my-new-list",
 		    html: icon3.join( "" )
 		  }).appendTo( ".icon3" );
 
+		  //pushes three days after temp onto the page
+
 		  var three = []
-		  three.push(' ' + parseInt(data.list[3].main.temp) + '°');
+		  three.push(' ' + parseInt(data.list[3].main.temp) + '<img src="img/four.png">');
 
 		  $( "<p/>", {
-		    "class": "my-new-list",
+		    "class": "three",
 		    html: three.join( "" )
 		  }).appendTo( "#three" );
+
+		  // DATETIME SECTION
 
 		  var oneSub = [];
 		  var twoSub = [];
 		  var threeSub = [];
+
+		  // Grabs the weekday and stores them into an array
 
 		  var d = new Date();
 		  var weekday = new Array(7);
@@ -188,19 +193,31 @@ $(function(){
 		  weekday[6] = "Sat";
 
 		  var weekDay = weekday[d.getDay()+1];
+		  if (weekDay === undefined){
+		  	weekDay = weekday[d.getDay()-6]
+		  }
 		  var weekDay2 = weekday[d.getDay()+2];
+		  if (weekDay2 === undefined){
+		  	weekDay2 = weekday[d.getDay()-5]
+		  }
 		  var weekDay3 = weekday[d.getDay()+3];
+		  if (weekDay3 === undefined){
+		  	weekDay3 = weekday[d.getDay()-4]
+		  }
 
+		  // Grabs each month and stores them into an array
 
 		  var month = new Array(
 		    	'Jan', 'Feb', 'Mar', 'Apr', 'May',
 		    	'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 
 		    	'Nov', 'Dec'
 		    	);
-		  var monthStr = month[d.getMonth()+1];
-		  var monthStr2 = month[d.getMonth()+1];
-		  var monthStr3 = month[d.getMonth()+1];
+		  var monthStr = month[d.getMonth()];
+		  var monthStr2 = month[d.getMonth()];
+		  var monthStr3 = month[d.getMonth()];
 		  
+		  // Sets days up to 3 days in the future
+
 		  var myDate=new Date();
 		  myDate.setDate(myDate.getDate()+1);
 		  var myDate2=new Date();
@@ -216,7 +233,6 @@ $(function(){
 		  twoSub.push(dtt);
 		  threeSub.push(dttt);
 
-
 		  $( "<p/>", {
 		    "class": "my-new-list",
 		    html: oneSub.join( "" )
@@ -230,11 +246,10 @@ $(function(){
 		    html: threeSub.join( "" )
 		  }).appendTo( "#three-sub" );
 
-		}); //end of get
+		}); //end of get request
 
-		$city = " ";
-
+		$citySearch[0].reset() //resets the form
+		
 	}); //end of on onSubmit
-
-}) //end of it all
+})
 
